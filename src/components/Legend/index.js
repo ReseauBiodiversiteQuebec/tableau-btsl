@@ -34,8 +34,6 @@ const Legend = (props) => {
     title,
   } = props;
 
-  useEffect(() => {}, []);
-
   let customclass = "";
 
   customclass += (absolute ? "absolute " : "") + " ";
