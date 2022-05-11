@@ -3,13 +3,13 @@ import Slider from "@mui/material/Slider";
 import { SliderContainer } from "./sliderstyle";
 import { colors } from "../../styles";
 
-
 function valuetext(value) {
   return `${value}`;
 }
 
 function CustomSlider(props) {
   const { values, notifyChange, selectorId, value } = props;
+
   return (
     <SliderContainer>
       <Slider
@@ -18,13 +18,13 @@ function CustomSlider(props) {
         step={null}
         marks={values}
         track={false}
-        sx={{ color: colors.green, track:{display:"none"} }}
+        sx={{ color: colors.green, track: { display: "none" } }}
         value={value}
-        valueLabelFormat={value => <div>{2010+value}</div>}
+        valueLabelFormat={(value) => <div>{2010 + value}</div>}
         valueLabelDisplay="on"
         onChangeCommitted={(e, value) => {
           const element = values.filter((item, i) => item.value === value);
-          notifyChange({selectorId, value:value});
+          notifyChange({ selectorId, value: value });
         }}
       />
     </SliderContainer>

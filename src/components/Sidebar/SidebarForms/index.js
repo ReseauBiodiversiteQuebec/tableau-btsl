@@ -46,12 +46,24 @@ function SidebarForms(props) {
 
   const layers = [
     { option: "HabitatSuitability", value: "Convenance de l'habitat" },
-    { option: "ConversionProbability", value: "Probabilité de conversion en zone urbaine" },
+    {
+      option: "ConversionProbability",
+      value: "Probabilité de conversion en zone urbaine",
+    },
     { option: "curmap", value: "Connectivité" },
-    { option: "Zonation2", value: "Priorisation pour la conservation aujourd'hui" },
-    { option: "Zonation3", value: "Priorisation pour la conservation 2010-2110" },
+    {
+      option: "Zonation2",
+      value: "Priorisation pour la conservation aujourd'hui",
+    },
+    {
+      option: "Zonation3",
+      value: "Priorisation pour la conservation 2010-2110",
+    },
     { option: "Linkages", value: "Liens prioritaires" },
-    { option: "Linkages_buffer", value: "Liens prioritaires dans la zone étendue" },
+    {
+      option: "Linkages_buffer",
+      value: "Liens prioritaires dans la zone étendue",
+    },
   ];
 
   const scenarios_climate = [
@@ -74,29 +86,31 @@ function SidebarForms(props) {
   ];
 
   const species = [
-      {
-        option: "BLBR",
-        value: "Blarina brevicauda",
-        vernacular_fr: "Grand musaraigne",
-      },
-      { option: "MAAM", 
-        value: "Martes americana", 
-        vernacular_fr: "Martre d'Amérique" },
-      {
-        option: "PLCI",
-        value: "Plethodon cinereus",
-        vernacular_fr: "Salamandre rayée",
-      },
-      {
-        option: "RANA",
-        value: "Lithobates sylvaticus",
-        vernacular_fr: "Grenouille des bois",
-      },
-      {
-        option: "URAM",
-        value: "Ursus americanus",
-        vernacular_fr: "Ours noir",
-      }  
+    {
+      option: "BLBR",
+      value: "Blarina brevicauda",
+      vernacular_fr: "Grand musaraigne",
+    },
+    {
+      option: "MAAM",
+      value: "Martes americana",
+      vernacular_fr: "Martre d'Amérique",
+    },
+    {
+      option: "PLCI",
+      value: "Plethodon cinereus",
+      vernacular_fr: "Salamandre rayée",
+    },
+    {
+      option: "RANA",
+      value: "Lithobates sylvaticus",
+      vernacular_fr: "Grenouille des bois",
+    },
+    {
+      option: "URAM",
+      value: "Ursus americanus",
+      vernacular_fr: "Ours noir",
+    },
   ];
 
   /**
@@ -116,14 +130,16 @@ function SidebarForms(props) {
       newState.in_scenario_landuse = selectObj.value;
     } else if (selectObj.selectorId === "layers") {
       newState.in_layer = selectObj.value;
-      if(selectObj.value === 'HabitatSuitability' | selectObj.value ==='curmap'){
-        setShowSpecies(true)
-        setShowRPC(true)
-      }else{
-        setShowSpecies(false)
-        setShowRPC(false) 
+      if (
+        (selectObj.value === "HabitatSuitability") |
+        (selectObj.value === "curmap")
+      ) {
+        setShowSpecies(true);
+        setShowRPC(true);
+      } else {
+        setShowSpecies(false);
+        setShowRPC(false);
       }
-
     } else if (selectObj.selectorId === "species") {
       newState.in_species = selectObj.value;
     }
@@ -135,8 +151,8 @@ function SidebarForms(props) {
         newState.in_layer,
         newState.in_species,
         newState.in_year
-        )
       )
+    );
   };
 
   let playTimeSeries = () => {
@@ -186,74 +202,75 @@ function SidebarForms(props) {
           value={state.in_layer}
         />
       </WrapperContainer>
-      { showSpecies ? 
-      <WrapperContainer>
-        <SelectorTitle>Espèce</SelectorTitle>
-        <GroupedSelect
-          className="selector"
-          elementList={species}
-          selectorId={"species"}
-          onValueChange={selectFormValuesChanged}
-          value={state.in_species}
-        />
-      </WrapperContainer>
-      : null }
-      { showRPC ? <WrapperContainer>
-        <SelectorTitle>Scénario climatique</SelectorTitle>
-        <Selector
-          className="selector"
-          selectorList={scenarios_climate}
-          selectorId={"scenarios_climate"}
-          onValueChange={selectFormValuesChanged}
-          value={state.in_scenario_climate}
-        />
-      </WrapperContainer>
-          : null }
-      { showRPC ? 
-       <WrapperContainer>
-        <SelectorTitle>Changement d'utilisation des terres</SelectorTitle>
-        <Selector
-          className="selector"
-          selectorList={scenarios_landuse}
-          selectorId={"scenarios_landuse"}
-          onValueChange={selectFormValuesChanged}
-          value={state.in_scenario_landuse}
-        />
-      </WrapperContainer>
-      : null }
-       { showRPC ? 
-      <Box
-        sx={{
-          width: "80%",
-          "margin-top": "30px",
-        }}
-      >
-        <Grid container spacing={2}>
-          <Grid item xs={10}>
-            <CustomSlider
-              inline
-              selectorId={"years"}
-              notifyChange={selectFormValuesChanged}
-              values={years}
-              value={state.in_year}
-            />
+      {showSpecies ? (
+        <WrapperContainer>
+          <SelectorTitle>Espèce</SelectorTitle>
+          <GroupedSelect
+            className="selector"
+            elementList={species}
+            selectorId={"species"}
+            onValueChange={selectFormValuesChanged}
+            value={state.in_species}
+          />
+        </WrapperContainer>
+      ) : null}
+      {showRPC ? (
+        <WrapperContainer>
+          <SelectorTitle>Scénario climatique</SelectorTitle>
+          <Selector
+            className="selector"
+            selectorList={scenarios_climate}
+            selectorId={"scenarios_climate"}
+            onValueChange={selectFormValuesChanged}
+            value={state.in_scenario_climate}
+          />
+        </WrapperContainer>
+      ) : null}
+      {showRPC ? (
+        <WrapperContainer>
+          <SelectorTitle>Changement d'utilisation des terres</SelectorTitle>
+          <Selector
+            className="selector"
+            selectorList={scenarios_landuse}
+            selectorId={"scenarios_landuse"}
+            onValueChange={selectFormValuesChanged}
+            value={state.in_scenario_landuse}
+          />
+        </WrapperContainer>
+      ) : null}
+      {showRPC ? (
+        <Box
+          sx={{
+            width: "80%",
+            "margin-top": "30px",
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={10}>
+              <CustomSlider
+                inline
+                selectorId={"years"}
+                notifyChange={selectFormValuesChanged}
+                values={years}
+                value={state.in_year}
+              />
+            </Grid>
+            <Grid item xs={1}>
+              <IconButton
+                variant="contained"
+                onClick={playTimeSeries}
+                size="large"
+                sx={{
+                  height: "30px",
+                }}
+              >
+                {!play && <PlayCircleIcon size={"large"} />}
+                {play && <StopCircleIcon size={"large"} />}
+              </IconButton>
+            </Grid>
           </Grid>
-          <Grid item xs={1}>
-            <IconButton
-              variant="contained"
-              onClick={playTimeSeries}
-              size="large"
-              sx={{
-                height: "30px",
-              }}
-            >
-              {!play && <PlayCircleIcon size={"large"} />}
-              {play && <StopCircleIcon size={"large"} />}
-            </IconButton>
-          </Grid>
-        </Grid>
-      </Box>
-      : null }
+        </Box>
+      ) : null}
     </SidebarFormContainer>
   );
 }
