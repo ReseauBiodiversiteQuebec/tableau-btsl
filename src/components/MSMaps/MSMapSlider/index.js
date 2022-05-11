@@ -21,8 +21,6 @@ export default function MSMapSlider(props) {
     notifyChange(newValue);
   };
 
-  const values = [{ value: 0 }, { value: 50 }, { value: 100 }];
-
   let style = buildLocation(location, top, right, left, bottom);
   style = absolute
     ? {

@@ -601,3 +601,7 @@ styles for the entire application when leaflet-dragging is added to the body
 .leaflet-draw-tooltip-subtext br {
   display: none;
 }
+
+.leaflet-control-layers-selector{
+  width:20px !important;
+}

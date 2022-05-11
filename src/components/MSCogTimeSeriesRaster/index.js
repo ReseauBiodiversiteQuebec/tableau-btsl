@@ -32,16 +32,17 @@ export default function GeoRaster({
   }, [url, map]);
 
   useEffect(() => {
+    console.log(opacity / 100);
     if (raster) {
       const scale = chroma.scale(Object.values(cols)).domain([dmin, dmax]);
       let layerId = Math.random();
-      const layer = new GeoRasterLayer({
+      let layer = new GeoRasterLayer({
         attribution: "Planet",
         type: "coglayer",
         layer_id: layerId,
         georaster: raster,
         zIndex: 499,
-        opacity: opacity,
+        opacity: opacity / 100,
         debugLevel: 0,
         resolution: 128,
         pixelValuesToColorFn: (values) =>
