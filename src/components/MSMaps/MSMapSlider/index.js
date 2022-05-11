@@ -42,10 +42,7 @@ export default function MSMapSlider(props) {
         <OpacityIcon />
         <Slider
           aria-label="Opacity"
-          step={null}
-          track={false}
           value={value ?? 100}
-          marks={values}
           valueLabelDisplay="auto"
           onChange={opacityChange}
           sx={{ color: "#538887" }}
