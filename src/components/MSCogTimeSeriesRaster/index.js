@@ -21,9 +21,6 @@ export default function GeoRaster({
   const layerRef = React.useRef(null);
   const [raster, setRaster] = useState();
 
-  console.log("MSCogTimeSeriesRaster");
-  console.log(opacity);
-
   useEffect(() => {
     parseGeoraster(url).then((georaster) => {
       setRaster(georaster);
@@ -32,7 +29,6 @@ export default function GeoRaster({
   }, [url, map]);
 
   useEffect(() => {
-    console.log(opacity / 100);
     if (raster) {
       const scale = chroma.scale(Object.values(cols)).domain([dmin, dmax]);
       let layerId = Math.random();
@@ -71,7 +67,7 @@ export default function GeoRaster({
       container.addLayer(layer);
     }
     return () => {};
-  }, [raster, map]);
+  }, [raster, map, opacity]);
 
   return null;
 }
