@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/apps/tableau-btsl/precache-manifest.e08a733e73307804c2ca66896e483db4.js"
+  "/apps/tableau-btsl/precache-manifest.9f6bf2168f895f97ca043bd17786204c.js"
 );
 
 self.addEventListener('message', (event) => {

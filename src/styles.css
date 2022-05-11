@@ -5,3 +5,14 @@ body {
   margin: 0;
   box-sizing: content-box;
 }
+.leaflet-control-layers-selector{
+  width:20px !important;
+}
+
+.MuiSelect-select {
+  font-size:0.8em !important; 
+  border-radius:10px;
+}
+div[class$="MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"]{
+  border-radius:8px;
+}

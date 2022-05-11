@@ -29,8 +29,7 @@ export const CListSubheader = styled(ListSubheader)`
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 500;
     font-size: 0.875rem;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 0px 16px;
     position: -webkit-sticky;
     position: sticky;
     top: 0;

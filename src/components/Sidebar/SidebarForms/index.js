@@ -30,7 +30,7 @@ import {
 function SidebarForms(props) {
   const generalState = useSelector((state) => state.reducerState);
   const [showRPC, setShowRPC] = React.useState(true)
-  const [showSpecies, setShowSpecies] = React.useState(false)
+  const [showSpecies, setShowSpecies] = React.useState(true)
   const dispatch = useDispatch();
 
   let [state, setState] = React.useState({

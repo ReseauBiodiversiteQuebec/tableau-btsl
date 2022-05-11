@@ -34,8 +34,8 @@ export default function App() {
         <Slider aria-label="Opacity" step={null} track={false} value={opacity} valueLabelDisplay="auto" selectorId={"opacity"} onChange={opacityChange} sx={{color:'#538887'}} />
       </SliderContainer>
       </Control>
-      <LayersControl position="topright">
-      <LayersControl.BaseLayer checked name="Carte noir et blanc">
+      <LayersControl position="topright" style={{width:'250px'}}>
+      <LayersControl.BaseLayer checked name="Noir et blanc">
         <TileLayer
          zIndex={4}
          style={{ zIndex: 4 }}
@@ -43,7 +43,7 @@ export default function App() {
          attribution='&copy; <a href="http://osm.org/copyright">Stamen</a> contributors'
         />
         </LayersControl.BaseLayer>
-      <LayersControl.BaseLayer name="Carte satellite">
+      <LayersControl.BaseLayer name="Satellite">
         <TileLayer
           zIndex={4}
           style={{ zIndex: 4 }}
@@ -51,7 +51,7 @@ export default function App() {
           attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         />
         </LayersControl.BaseLayer>
-      <LayersControl.BaseLayer name="Carte OSM">
+      <LayersControl.BaseLayer name="OpenStreetMap">
         <TileLayer
           zIndex={4}
           style={{ zIndex: 4 }}

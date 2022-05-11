@@ -21,7 +21,8 @@ export const GlobalStyle = createGlobalStyle`
       //scrollbar-width: none; /* for Firefox */
       //overflow-y: scroll; 
       & [class*="MuiButtonBase-root-MuiMenuItem-root"] {
-        padding: 2px 16px
+        padding: 2px 16px;
+        font-size:0.9em;
       }
     } 
 
