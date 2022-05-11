@@ -5,14 +5,24 @@ import parseGeoraster from "georaster";
 import GeoRasterLayer from "georaster-layer-for-leaflet";
 import chroma from "chroma-js";
 
-  //.domain([0.00004, 0.001]);
+//.domain([0.00004, 0.001]);
 
-export default function GeoRaster({ url, current_layer, dmin, dmax, cols, opacity }) {
+export default function GeoRaster({
+  url,
+  current_layer,
+  dmin,
+  dmax,
+  cols,
+  opacity,
+}) {
   const map = useMap();
   //const { map, layerContainer } = useLeaflet();
   const layerContainer = map.getContainer();
   const layerRef = React.useRef(null);
   const [raster, setRaster] = useState();
+
+  console.log("MSCogTimeSeriesRaster");
+  console.log(opacity);
 
   useEffect(() => {
     parseGeoraster(url).then((georaster) => {
@@ -35,7 +45,11 @@ export default function GeoRaster({ url, current_layer, dmin, dmax, cols, opacit
         debugLevel: 0,
         resolution: 128,
         pixelValuesToColorFn: (values) =>
-          ((values[0] === 0) | isNaN(values[0]) | (values[0] === Infinity) | (values[0]<-9999) | (values[0]<0))
+          (values[0] === 0) |
+          isNaN(values[0]) |
+          (values[0] === Infinity) |
+          (values[0] < -9999) |
+          (values[0] < 0)
             ? "#ffffff00"
             : scale(values[0]).hex(),
       });

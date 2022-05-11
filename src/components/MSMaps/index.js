@@ -69,6 +69,7 @@ export default function App() {
             dmin={generalState.dmin}
             dmax={generalState.dmax}
             cols={generalState.legend_colors}
+            opacity={opacity}
           />
         </LayersControl.Overlay>
       </MapContainer>
