@@ -21,12 +21,7 @@ export default function MSMapSlider(props) {
   const opacityChange = (event, newValue) => {
     //setOpacity(newValue);
     notifyChange(newValue);
-    //etOpacity(newValue)
   };
-
-  console.log("value");
-  console.log(value);
-  const values = [{ value: 0 }, { value: 50 }, { value: 100 }];
 
   let style = buildLocation(location, top, right, left, bottom);
   style = absolute
@@ -44,7 +39,6 @@ export default function MSMapSlider(props) {
         <Slider
           aria-label="Opacity"
           value={value ?? 100}
-          marks={null}
           valueLabelDisplay="auto"
           onChange={opacityChange}
           sx={{ color: "#538887" }}

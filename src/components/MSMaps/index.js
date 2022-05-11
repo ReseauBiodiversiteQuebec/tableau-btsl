@@ -1,6 +1,5 @@
 import React from "react";
 import "leaflet/dist/leaflet.css";
-import Control from "react-leaflet-custom-control";
 import { MapContainer, TileLayer, LayersControl } from "react-leaflet";
 import MSCogTimeSeriesRaster from "../MSCogTimeSeriesRaster";
 import { useSelector } from "react-redux";
@@ -69,6 +68,7 @@ export default function App() {
             dmin={generalState.dmin}
             dmax={generalState.dmax}
             cols={generalState.legend_colors}
+            opacity={opacity}
           />
         </LayersControl.Overlay>
       </MapContainer>
