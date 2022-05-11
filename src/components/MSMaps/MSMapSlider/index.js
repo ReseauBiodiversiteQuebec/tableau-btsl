@@ -16,10 +16,8 @@ export default function MSMapSlider(props) {
     value,
     notifyChange = (newValue) => newValue,
   } = props;
-  const [opacity, setOpacity] = React.useState(100);
 
   const opacityChange = (event, newValue) => {
-    //setOpacity(newValue);
     notifyChange(newValue);
   };
 
@@ -42,10 +40,7 @@ export default function MSMapSlider(props) {
         <OpacityIcon />
         <Slider
           aria-label="Opacity"
-          step={null}
-          track={false}
           value={value ?? 100}
-          marks={values}
           valueLabelDisplay="auto"
           onChange={opacityChange}
           sx={{ color: "#538887" }}
