@@ -16,10 +16,8 @@ export default function MSMapSlider(props) {
     value,
     notifyChange = (newValue) => newValue,
   } = props;
-  const [opacity, setOpacity] = React.useState(100);
 
   const opacityChange = (event, newValue) => {
-    //setOpacity(newValue);
     notifyChange(newValue);
   };
 
