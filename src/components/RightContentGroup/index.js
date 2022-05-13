@@ -9,9 +9,16 @@ function RightContentGroup(props) {
   const realWith = width > 768 ? width - 350 : width;
   const generalState = useSelector((state) => state.reducerState);
   let legend_items = [];
-  for (const [key, value] of Object.entries(generalState.legend_colors)) {
-    legend_items.push({ text: key, color: value });
+  if(generalState.current_layer=='LandCover'){
+      generalState.legend_colors.obj.forEach(c=>{
+        legend_items.push({ text: c.name, color: c.color });
+      })
+  }else{
+    for (const [key, value] of Object.entries(generalState.legend_colors)) {
+      legend_items.push({ text: key, color: value });
+    }
   }
+
 
   return (
     <RightContent style={{ width: `${realWith}px` }}>

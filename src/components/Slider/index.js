@@ -18,7 +18,7 @@ function CustomSlider(props) {
         step={null}
         marks={values}
         track={false}
-        sx={{ color: colors.green, track: { display: "none" } }}
+        sx={{ color: colors.base.green, track: { display: "none" } }}
         value={value}
         valueLabelFormat={(value) => <div>{2010 + value}</div>}
         valueLabelDisplay="on"

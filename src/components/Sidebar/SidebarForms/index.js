@@ -26,11 +26,12 @@ import {
   createSliderList,
   groupingAndSortList,
 } from "../../../utils/helper";
+import { colors } from "../../../styles";
 
 function SidebarForms(props) {
   const generalState = useSelector((state) => state.reducerState);
   const [showRPC, setShowRPC] = React.useState(true)
-  const [showSpecies, setShowSpecies] = React.useState(true)
+  const [showSpecies, setShowSpecies] = React.useState(false)
   const dispatch = useDispatch();
 
   let [state, setState] = React.useState({
@@ -38,13 +39,14 @@ function SidebarForms(props) {
     in_species: "BLBR",
     in_scenario_climate: "NC",
     in_scenario_landuse: "NC",
-    in_layer: "HabitatSuitability",
+    in_layer: "LandCover",
   });
 
   const [play, setPlay] = useState(false);
   const [intervalID, setIntervalID] = useState(0);
 
   const layers = [
+    { option: "LandCover", value: "Couverture du sol" },
     { option: "HabitatSuitability", value: "Convenance de l'habitat" },
     {
       option: "ConversionProbability",
@@ -136,7 +138,10 @@ function SidebarForms(props) {
       ) {
         setShowSpecies(true);
         setShowRPC(true);
-      } else {
+      }else if(selectObj.value === "LandCover") {
+        setShowSpecies(false);
+        setShowRPC(true);
+      }else {
         setShowSpecies(false);
         setShowRPC(false);
       }
@@ -262,6 +267,8 @@ function SidebarForms(props) {
                 size="large"
                 sx={{
                   height: "30px",
+                  color: colors.base.darkgreen,
+                  paddingLeft: "0px"
                 }}
               >
                 {!play && <PlayCircleIcon size={"large"} />}
