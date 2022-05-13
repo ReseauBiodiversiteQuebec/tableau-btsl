@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6753db7b7aa115f067e8c20d413967c7",
+    "revision": "9bb3b04252c8064010c70c0c1dcdf07b",
     "url": "/apps/tableau-btsl/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/apps/tableau-btsl/static/css/2.f193e0c3.chunk.css"
   },
   {
-    "revision": "3eeb44705fbfaff9fb8f",
+    "revision": "19303589687ce9c683e9",
     "url": "/apps/tableau-btsl/static/css/main.82f1a141.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/apps/tableau-btsl/static/js/2.e9ffeb11.chunk.js"
   },
   {
-    "revision": "3eeb44705fbfaff9fb8f",
-    "url": "/apps/tableau-btsl/static/js/main.82f0a407.chunk.js"
+    "revision": "19303589687ce9c683e9",
+    "url": "/apps/tableau-btsl/static/js/main.4f9b1f99.chunk.js"
   },
   {
     "revision": "bdc4b9dc8cb1de1c2887",

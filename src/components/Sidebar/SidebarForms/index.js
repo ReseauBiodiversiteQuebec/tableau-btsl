@@ -21,6 +21,13 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
 import GroupedSelect from "../../CustomSelector/GroupingSelector";
 import Selector from "../../CustomSelector/Selector";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import FormControl from '@mui/material/FormControl';
 import {
   createSelectorModel,
   createSliderList,
@@ -33,6 +40,7 @@ function SidebarForms(props) {
   const [showRPC, setShowRPC] = React.useState(true)
   const [showSpecies, setShowSpecies] = React.useState(false)
   const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false);
 
   let [state, setState] = React.useState({
     in_year: 0,
@@ -44,6 +52,14 @@ function SidebarForms(props) {
 
   const [play, setPlay] = useState(false);
   const [intervalID, setIntervalID] = useState(0);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const layers = [
     { option: "LandCover", value: "Couverture du sol" },
@@ -207,6 +223,22 @@ function SidebarForms(props) {
           value={state.in_layer}
         />
       </WrapperContainer>
+        <Button variant="outlined" onClick={handleClickOpen} sx={{color: colors.base.darkgreen, border: '1px solid '+colors.base.darkgreen}}>
+                Description
+              </Button>
+              <Dialog
+                fullWidth={true}
+                maxWidth="md"
+                open={open}
+                onClose={handleClose}
+              >
+          <DialogContentText  sx={{padding: '40px'}}> 
+            {generalState.layer_description}
+          </DialogContentText>
+           <DialogActions>
+          <Button onClick={handleClose}>Fermer</Button>
+        </DialogActions>
+          </Dialog>
       {showSpecies ? (
         <WrapperContainer>
           <SelectorTitle>Espèce</SelectorTitle>
