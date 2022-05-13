@@ -86,7 +86,7 @@ function SidebarForms(props) {
 
   const scenarios_climate = [
     { option: "NC", value: "Historique" },
-    { option: "85", value: "RCP85" },
+    { option: "85", value: "Fortes émissions et changements climatiques importants (RCP85)" },
   ];
 
   const scenarios_landuse = [
