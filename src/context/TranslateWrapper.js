@@ -17,7 +17,7 @@ export const TranslateWrapper = (props) => {
     setLanguage(i18n.language === "apps" ? "fr" : "en");
   }, []);
 
-  document.title = t("Forêts québécoises et changements climatiques");
+  document.title = t("Connectivité écologique dans les basses-terres du Saint-Laurent");
 
   return (
     <TranslationContext.Provider
