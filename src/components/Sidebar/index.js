@@ -14,14 +14,14 @@ function Sidebar(props) {
     <SiderContainer>
       <SiderTitleContainer>
         <Title>
-          <div className="dash-icon icon-bq_icons_tree" />
+          <div className="dash-icon fianimals animals-004-bear" />
           <div className="dash-title">
             Connectivité écologique dans les Basses-terres du Saint-Laurent
           </div>
         </Title>
 
         <Description>
-          Modélisation de la connectivité écologique 
+          Modélisation de la connectivité écologique actuelle et 
           en fonction de différents scénarios de changement d'utlisation 
           des terres et de changements climatiques . <br />
           {" "}
