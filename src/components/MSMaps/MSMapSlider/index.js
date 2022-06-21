@@ -26,7 +26,7 @@ export default function MSMapSlider(props) {
     ? {
         ...style,
         position: "absolute",
-        zIndex: 100000,
+        zIndex: 1000,
         width: `${width}px`,
       }
     : style;
@@ -38,9 +38,7 @@ export default function MSMapSlider(props) {
           aria-label="Opacity"
           value={value ?? 100}
           valueLabelDisplay="auto"
-          onChangeCommitted={(e, value) => {
-            notifyChange(value);
-          }}
+          onChangeCommitted={opacityChange}
           sx={{ color: "#538887" }}
         />
       </SliderContainer>

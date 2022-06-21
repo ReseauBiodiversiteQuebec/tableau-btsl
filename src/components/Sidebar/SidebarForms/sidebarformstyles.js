@@ -32,5 +32,5 @@ export const SelectorTitle = styled.div`
   font-weight: bold;
   color: ${colors.base.darkgreen};
   font-size: 12pt;
-  padding: 0.5em 0;
+  padding: 0.15em 0;
 `;

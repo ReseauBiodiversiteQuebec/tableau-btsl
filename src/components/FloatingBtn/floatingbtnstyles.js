@@ -3,7 +3,7 @@ import { colors } from "../../styles";
 import IconButton from "@mui/material/IconButton";
 
 export const FloatingBtnContainer = styled.div`
-  background-color: ${colors.green};
+  background-color: ${colors.base.green};
   position: absolute;
   z-index: 1000;
   width: 60px;
@@ -12,6 +12,6 @@ export const FloatingBtnContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  left: 50px;
-  bottom: 50px;
+  left: 80px;
+  bottom: 120px;
 `;

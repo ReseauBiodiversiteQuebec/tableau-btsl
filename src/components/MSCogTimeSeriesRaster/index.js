@@ -20,9 +20,8 @@ export default function GeoRaster({
   const layerContainer = map.getContainer();
   const layerRef = React.useRef(null);
   const [raster, setRaster] = useState();
-
-  console.log("MSCogTimeSeriesRaster");
-  console.log(opacity);
+  let scale=[]
+  let color_palette={}
 
   useEffect(() => {
     parseGeoraster(url).then((georaster) => {
@@ -31,10 +30,18 @@ export default function GeoRaster({
     return () => {};
   }, [url, map]);
 
+  if(current_layer=='LandCover'){
+    cols.obj.forEach(c=>{
+      c.values.forEach(v=>{
+        color_palette[v]=c.color
+      })      
+    })
+  }
   useEffect(() => {
-    console.log(opacity / 100);
     if (raster) {
-      const scale = chroma.scale(Object.values(cols)).domain([dmin, dmax]);
+      if(current_layer!=='LandCover'){
+        scale = chroma.scale(Object.values(cols)).domain([dmin, dmax]);
+      }
       let layerId = Math.random();
       let layer = new GeoRasterLayer({
         attribution: "Planet",
@@ -44,15 +51,22 @@ export default function GeoRaster({
         zIndex: 499,
         opacity: 0.9,
         debugLevel: 0,
+        resampleMethod: "nearest",
+        interleave: true,
         resolution: 128,
-        pixelValuesToColorFn: (values) =>
-          (values[0] === 0) |
-          isNaN(values[0]) |
-          (values[0] === Infinity) |
-          (values[0] < -9999) |
-          (values[0] < 0)
-            ? "#ffffff00"
-            : scale(values[0]).hex(),
+        pixelValuesToColorFn: (values) =>{
+          if(current_layer==='LandCover'){
+            if(values[0]>0){
+              return color_palette[values[0]]
+            }
+          }else{
+            if((values[0] === 0) | isNaN(values[0]) | (values[0] === Infinity) | (values[0] < -9999) |(values[0] < 0)) {
+              return "#ffffff00"
+            }else{
+              return scale(values[0]).hex()
+            }
+          }
+        }
       });
       layer.on("load", (event) => {
         setTimeout(() => {

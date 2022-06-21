@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, LayersControl } from "react-leaflet";
 import MSCogTimeSeriesRaster from "../MSCogTimeSeriesRaster";
@@ -8,6 +8,10 @@ import OpacityIcon from "@mui/icons-material/Opacity";
 import CustomSlider from "../Slider";
 import { SliderContainer } from "../Slider/sliderstyle";
 import MSMapSlider from "./MSMapSlider";
+import { GeoJSON } from "react-leaflet";
+import _ from "lodash"
+
+
 
 const MAP_STYLES = {
   position: "relative",
@@ -15,10 +19,41 @@ const MAP_STYLES = {
   height: "100vh",
   padding: "0",
 };
+const shapeStyle = (properties) => {
+  return {
+    weight: 1,
+    color: '#aa0000',
+    opacity: 0.85,
+    fillOpacity: 0.5,
+  };
+};
 
+const onEachPolygon = (polygon, layer) => {
+  const style = shapeStyle(polygon.properties);
+  layer.setStyle(style);
+};
+
+            
 export default function App() {
+  const [PA,setPA]=useState(false);
   const generalState = useSelector((state) => state.reducerState);
   const [opacity, setOpacity] = React.useState(100);
+  const getData=()=>{
+    fetch('protected_areas_ll.json', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        return response.json();
+      }).then(myJson => {
+        setPA(myJson)
+    });
+  }
+
+  useEffect(()=>{
+    getData()
+  },[])
 
   return (
     <div
@@ -35,6 +70,15 @@ export default function App() {
         zoom={8}
         maxZoom={25}
       >
+        {generalState.show_pa ? (
+        <GeoJSON
+          key={_.uniqueId(JSON.stringify({ n: Math.random(), m: Date.now() }))}
+          data={PA}
+          zIndex={888}
+          style= {{color: '#000000',stroke: '#0000000'}}
+          onEachFeature={onEachPolygon}
+        />
+       ) : null}
         <LayersControl position="topright">
           <LayersControl.BaseLayer checked name="Carte noir et blanc">
             <TileLayer
