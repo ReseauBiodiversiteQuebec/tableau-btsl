@@ -42,7 +42,7 @@ export default function GeoRaster({
         layer_id: layerId,
         georaster: raster,
         zIndex: 499,
-        opacity: opacity / 100,
+        opacity: 0.9,
         debugLevel: 0,
         resolution: 128,
         pixelValuesToColorFn: (values) =>
@@ -71,7 +71,7 @@ export default function GeoRaster({
       container.addLayer(layer);
     }
     return () => {};
-  }, [raster, map]);
+  }, [raster, map, opacity]);
 
   return null;
 }
