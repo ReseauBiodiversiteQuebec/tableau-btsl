@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import _ from "underscore";
 import { Marker, Tooltip, useMap } from "react-leaflet";
 import L from "leaflet";
+//import * as pta from "./protected_areas_ll.json";
 
 /**
  *
@@ -11,6 +12,7 @@ function TileTimeSeries(props) {
   const {
     legend,
     setColormap,
+    current_layer,
     colormap,
     colormapList,
     dmin,
@@ -49,7 +51,7 @@ function TileTimeSeries(props) {
           parseInt(result[1], 16),
           parseInt(result[2], 16),
           parseInt(result[3], 16),
-          255,
+          Math.round((255 * opacity) / 100),
         ]
       : null;
   }
@@ -92,12 +94,19 @@ function TileTimeSeries(props) {
       let rescale = "";
       let resampling = "";
       let nodata = "";
-      if (cols.obj === undefined) {
+      if (current_layer !== "LandCover") {
         rescale = `&rescale=${dmin},${dmax}`;
         resampling = "&resampling=bilinear";
         nodata = "&nodata=0";
       } else {
         resampling = "&resampling=nearest";
+      }
+      if (
+        current_layer === "Zonation2" ||
+        current_layer === "Zonation3" ||
+        current_layer === "ConversionProbability"
+      ) {
+        nodata = "";
       }
       const params = new URLSearchParams(obj).toString();
       //const colormap = {};
@@ -110,6 +119,7 @@ function TileTimeSeries(props) {
       let layerId = Math.random();
       const layer = L.tileLayer(tile_ref, {
         attribution: "connect",
+        zIndex: 499,
         layer_id: layerId,
       });
       const container = map;
@@ -135,7 +145,7 @@ function TileTimeSeries(props) {
     return () => {
       if (legend && Object.keys(legend).length !== 0) legend.remove();
     };
-  }, [url]);
+  }, [url, opacity]);
 
   useEffect(() => {
     /*const layer = L.tileLayer(basemaps[basemap], {

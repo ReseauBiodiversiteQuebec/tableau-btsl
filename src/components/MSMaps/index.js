@@ -10,6 +10,7 @@ import CustomSlider from "../Slider";
 import { SliderContainer } from "../Slider/sliderstyle";
 import MSMapSlider from "./MSMapSlider";
 import { GeoJSON } from "react-leaflet";
+import pta from "./protected_areas.json";
 import _ from "lodash";
 
 const MAP_STYLES = {
@@ -36,7 +37,7 @@ export default function App() {
   const [PA, setPA] = useState(false);
   const generalState = useSelector((state) => state.reducerState);
   const [opacity, setOpacity] = React.useState(100);
-  /* const getData = () => {
+  const getData = () => {
     fetch("protected_areas_ll.json", {
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +55,7 @@ export default function App() {
   useEffect(() => {
     getData();
   }, []);
-*/
+
   return (
     <div
       style={{
@@ -82,7 +83,15 @@ export default function App() {
           />
         ) : null}
         <LayersControl position="topright">
-          <LayersControl.BaseLayer checked name="Carte noir et blanc">
+          <LayersControl.BaseLayer checked name="Carte de base">
+            <TileLayer
+              zIndex={4}
+              style={{ zIndex: 4 }}
+              url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="http://osm.org/copyright">Carto</a> contributors'
+            />
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer name="Carte noir et blanc">
             <TileLayer
               zIndex={4}
               style={{ zIndex: 4 }}
