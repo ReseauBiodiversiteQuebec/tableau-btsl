@@ -59,7 +59,7 @@ function TileTimeSeries(props) {
       let i = 1;
       let cmap = [];
       cmap.push([
-        [-99999, 0.999],
+        [-99999, 2],
         [255, 255, 255, 0],
       ]);
       let l1 = 0;
@@ -72,7 +72,13 @@ function TileTimeSeries(props) {
       });
       return cmap;
     } else {
-      return {};
+      let cmap = {};
+      const colormap = cols.obj.map((m) => {
+        m.values.map((v) => {
+          cmap[v] = m.color;
+        });
+      });
+      return cmap;
     }
   }
 
@@ -83,12 +89,21 @@ function TileTimeSeries(props) {
         colormap_name: JSON.stringify(cols),
         //expression
       };
-      const rescale = `${dmin},${dmax}`;
+      let rescale = "";
+      let resampling = "";
+      let nodata = "";
+      if (cols.obj === undefined) {
+        rescale = `&rescale=${dmin},${dmax}`;
+        resampling = "&resampling=bilinear";
+        nodata = "&nodata=0";
+      } else {
+        resampling = "&resampling=nearest";
+      }
       const params = new URLSearchParams(obj).toString();
       //const colormap = {};
       const dd = dmax - dmin;
 
-      const tile_ref = `${tiler}?url=${url}&unscale=True&rescale=${rescale}&return_mask=True&colormap=${encodeURIComponent(
+      const tile_ref = `${tiler}?url=${url}&unscale=True${rescale}${resampling}${nodata}&return_mask=True&colormap=${encodeURIComponent(
         JSON.stringify(createColorMap(cols))
       )}`;
 
