@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { colors, Container } from "../../styles";
 
 export const SliderContainer = styled(Container)`
-  color: ${colors.darkgreen};
-  padding: 0px;
+  color: black;
+  padding: 15px;
   width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
 `;

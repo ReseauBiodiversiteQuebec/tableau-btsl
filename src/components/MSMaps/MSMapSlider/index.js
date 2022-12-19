@@ -39,7 +39,7 @@ export default function MSMapSlider(props) {
           value={value ?? 100}
           valueLabelDisplay="auto"
           onChangeCommitted={opacityChange}
-          sx={{ color: "#538887" }}
+          sx={{ color: "#333333" }}
         />
       </SliderContainer>
     </div>

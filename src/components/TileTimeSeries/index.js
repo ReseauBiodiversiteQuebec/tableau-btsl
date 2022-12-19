@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import _ from "underscore";
 import { Marker, Tooltip, useMap } from "react-leaflet";
 import L from "leaflet";
+import chroma from "chroma-js";
 //import * as pta from "./protected_areas_ll.json";
 
 /**
@@ -58,10 +59,11 @@ function TileTimeSeries(props) {
 
   function createColorMap(cols) {
     if (cols.obj === undefined) {
-      let i = 1;
-      let cmap = [];
+      let cmap = {};
+      /*let i = 1;
+      
       cmap.push([
-        [-99999, 2],
+        [-99999, -10],
         [255, 255, 255, 0],
       ]);
       let l1 = 0;
@@ -72,12 +74,20 @@ function TileTimeSeries(props) {
         l1 = v;
         i++;
       });
+      return cmap;*/
+      let scale = chroma.scale(Object.values(cols)).domain([0, 255]);
+      const colormap = Array(255)
+        .fill()
+        .map(
+          (element, index) =>
+            (cmap[index + 1] = hexToRgb(scale(index + 1).hex()))
+        );
       return cmap;
     } else {
       let cmap = {};
       const colormap = cols.obj.map((m) => {
         m.values.map((v) => {
-          cmap[v] = m.color;
+          cmap[v] = hexToRgb(m.color);
         });
       });
       return cmap;
@@ -86,7 +96,7 @@ function TileTimeSeries(props) {
 
   useEffect(() => {
     if (url !== "" && typeof url !== "undefined") {
-      const tiler = `https://tiler.biodiversite-quebec.ca/cog/tiles/{z}/{x}/{y}`;
+      const tiler = `https://tiler.biodiversite-quebec.ca/cog/tiles/{z}/{x}/{y}.png`;
       const obj = {
         colormap_name: JSON.stringify(cols),
         //expression
@@ -112,7 +122,7 @@ function TileTimeSeries(props) {
       //const colormap = {};
       const dd = dmax - dmin;
 
-      const tile_ref = `${tiler}?url=${url}&unscale=True${rescale}${resampling}${nodata}&return_mask=True&colormap=${encodeURIComponent(
+      const tile_ref = `${tiler}?url=${url}${rescale}${resampling}${nodata}&return_mask=True&colormap=${encodeURIComponent(
         JSON.stringify(createColorMap(cols))
       )}`;
 
