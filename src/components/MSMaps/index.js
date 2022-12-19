@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, LayersControl } from "react-leaflet";
-import MSCogTimeSeriesRaster from "../MSCogTimeSeriesRaster";
+//import MSCogTimeSeriesRaster from "../MSCogTimeSeriesRaster";
+import TileTimeSeries from "../TileTimeSeries";
 import { useSelector } from "react-redux";
 import Slider from "@mui/material/Slider";
 import OpacityIcon from "@mui/icons-material/Opacity";
@@ -9,9 +10,7 @@ import CustomSlider from "../Slider";
 import { SliderContainer } from "../Slider/sliderstyle";
 import MSMapSlider from "./MSMapSlider";
 import { GeoJSON } from "react-leaflet";
-import _ from "lodash"
-
-
+import _ from "lodash";
 
 const MAP_STYLES = {
   position: "relative",
@@ -22,7 +21,7 @@ const MAP_STYLES = {
 const shapeStyle = (properties) => {
   return {
     weight: 1,
-    color: '#aa0000',
+    color: "#aa0000",
     opacity: 0.85,
     fillOpacity: 0.5,
   };
@@ -33,28 +32,29 @@ const onEachPolygon = (polygon, layer) => {
   layer.setStyle(style);
 };
 
-            
 export default function App() {
-  const [PA,setPA]=useState(false);
+  const [PA, setPA] = useState(false);
   const generalState = useSelector((state) => state.reducerState);
   const [opacity, setOpacity] = React.useState(100);
-  const getData=()=>{
-    fetch('protected_areas_ll.json', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      }).then(response => {
+  /* const getData = () => {
+    fetch("protected_areas_ll.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((response) => {
         return response.json();
-      }).then(myJson => {
-        setPA(myJson)
-    });
-  }
+      })
+      .then((myJson) => {
+        setPA(myJson);
+      });
+  };
 
-  useEffect(()=>{
-    getData()
-  },[])
-
+  useEffect(() => {
+    getData();
+  }, []);
+*/
   return (
     <div
       style={{
@@ -71,14 +71,16 @@ export default function App() {
         maxZoom={25}
       >
         {generalState.show_pa ? (
-        <GeoJSON
-          key={_.uniqueId(JSON.stringify({ n: Math.random(), m: Date.now() }))}
-          data={PA}
-          zIndex={888}
-          style= {{color: '#000000',stroke: '#0000000'}}
-          onEachFeature={onEachPolygon}
-        />
-       ) : null}
+          <GeoJSON
+            key={_.uniqueId(
+              JSON.stringify({ n: Math.random(), m: Date.now() })
+            )}
+            data={PA}
+            zIndex={888}
+            style={{ color: "#000000", stroke: "#0000000" }}
+            onEachFeature={onEachPolygon}
+          />
+        ) : null}
         <LayersControl position="topright">
           <LayersControl.BaseLayer checked name="Carte noir et blanc">
             <TileLayer
@@ -106,7 +108,7 @@ export default function App() {
           </LayersControl.BaseLayer>
         </LayersControl>
         <LayersControl.Overlay name="Couche d'analyse">
-          <MSCogTimeSeriesRaster
+          <TileTimeSeries
             url={generalState.cog_uri}
             current_layer={generalState.current_layer}
             dmin={generalState.dmin}
