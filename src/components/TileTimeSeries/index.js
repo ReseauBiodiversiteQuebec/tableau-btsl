@@ -96,11 +96,7 @@ function TileTimeSeries(props) {
 
   useEffect(() => {
     if (url !== "" && typeof url !== "undefined") {
-      const tiler = `https://tiler.biodiversite-quebec.ca/cog/tiles/{z}/{x}/{y}.png`;
-      const obj = {
-        colormap_name: JSON.stringify(cols),
-        //expression
-      };
+      const tiler = `https://tiler.biodiversite-quebec.ca/cog/tiles/{z}/{x}/{y}@2x.png`;
       let rescale = "";
       let resampling = "";
       let nodata = "";
@@ -118,11 +114,7 @@ function TileTimeSeries(props) {
       ) {
         nodata = "";
       }
-      const params = new URLSearchParams(obj).toString();
-      //const colormap = {};
-      const dd = dmax - dmin;
-
-      const tile_ref = `${tiler}?url=${url}${rescale}${resampling}${nodata}&return_mask=True&colormap=${encodeURIComponent(
+      const tile_ref = `${tiler}?url=${url}${rescale}${resampling}${nodata}&unscale=True&return_mask=True&colormap=${encodeURIComponent(
         JSON.stringify(createColorMap(cols))
       )}`;
 
