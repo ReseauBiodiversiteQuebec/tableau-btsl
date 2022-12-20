@@ -255,7 +255,7 @@ function SidebarForms(props) {
               newState.in_year
             )
           );
-        }, 1500)
+        }, 2000)
       );
       setPlay(true);
     } else {
